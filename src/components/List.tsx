@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import trash from "../assets/trash.png"
 import pen from "../assets/pen.png"
