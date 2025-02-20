@@ -9,7 +9,7 @@ const styleMenu = {
 
 export const Menu = () => {
     return(
-        <nav className="w-full bg-amber-200 h-20">
+        <nav className="w-full bg-cyan-300 h-20">
             <div className="flex justify-start items-center h-20 font-bold text-[20px] pl-12">
                 {/* <Image src={} alt=""/> */}
                 <h2 className="flex">To-Do List</h2>

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
         <Menu/>
-        <List/>
+        <List list={""} title={"Tasks"} status={true} description={"Arrumar a sala"} date={"20/02/2024"}/>
     </div>
   );
 }
