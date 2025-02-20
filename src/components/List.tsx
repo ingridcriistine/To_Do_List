@@ -12,7 +12,6 @@ interface data {
     date: string
 }
 
-
 const List: React.FC<data> = ({list, title, status, description, date}) => {
     
     let currentStatus = "bg-red-500 w-4 h-4 rounded-lg";
@@ -28,6 +27,7 @@ const List: React.FC<data> = ({list, title, status, description, date}) => {
 
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
 
     const closeModal = () => {
         setModal(false);
@@ -43,6 +43,14 @@ const List: React.FC<data> = ({list, title, status, description, date}) => {
 
     const openEditModal = () => {
         setEditModal(true);
+    }
+
+    const closeDeleteModal = () => {
+        setDeleteModal(false);
+    }
+
+    const openDeleteModal = () => {
+        setDeleteModal(true);
     }
 
     return (
@@ -67,7 +75,7 @@ const List: React.FC<data> = ({list, title, status, description, date}) => {
                     </div>
                     <div className="flex flex-col">
                         <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openEditModal()}><Image src={pen} alt={""}/></button>
-                        <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100"><Image src={trash} alt={""}/></button>
+                        <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openDeleteModal()}><Image src={trash} alt={""}/></button>
                     </div>
                 </div>
             </div>
@@ -109,6 +117,22 @@ const List: React.FC<data> = ({list, title, status, description, date}) => {
                         <div className="flex justify-between mt-10">
                             <button onClick={() => closeEditModal()} className="flex justify-center items-center h-8 text-[15px] bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Cancel</button>
                             <button onClick={() => setEditModal(false)}className="flex justify-center items-center h-8 text-[15px] bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal delete task */}
+            <div className={deleteModal ? "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" : "disabled z-0 opacity-0"}>
+                <div className="bg-white p-8 rounded-lg shadow-lg flex items-center justify-center flex-col" >
+                    <div className="p-2 flex flex-col w-96 bg-opacity-50 z-50">
+                        <h2 className="text-xl font-semibold">Delete task</h2>
+                        <form className="flex flex-col">
+                            <label htmlFor="" className="mt-8">Are you sure?</label>
+                        </form>
+                        <div className="flex justify-between mt-10">
+                            <button onClick={() => closeDeleteModal()} className="flex justify-center items-center h-8 text-[15px] bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Cancel</button>
+                            <button onClick={() => setDeleteModal(false)}className="flex justify-center items-center h-8 text-[15px] bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Confirm</button>
                         </div>
                     </div>
                 </div>
