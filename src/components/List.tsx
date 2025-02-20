@@ -9,10 +9,9 @@ interface data {
     title: string,
     status: boolean,
     description: string,
-    date: string
-}
-
-const List: React.FC<data> = ({list, title, status, description, date}) => {
+    date: Date
+}  
+const List = ({ list }: { list: data[] }) => {
     
     let currentStatus = "bg-red-500 w-4 h-4 rounded-lg";
     const changeColor = (status:boolean) => {
@@ -60,24 +59,28 @@ const List: React.FC<data> = ({list, title, status, description, date}) => {
                 <button className="bg-cyan-600 text-white pl-4 pr-4 font-bold p-2 rounded" onClick={() => openModal()}>New task</button>
             </div> 
             <div className="mt-14">
-                <div className="flex items-center justify-between">
-                    <div className="w-[92%] mb-4 flex items-center justify-between rounded p-6 shadow-[0_0_5px_1px_rgba(0,0,0,0.3)] hover:shadow-[0_0_2px_1px_rgba(0,0,0,0.3)] ease-in-out duration-200">
-                        <div className=" flex flex-col gap-2">
-                            <h4 className="font-bold">{title}</h4>
-                            <p>{description}</p>
+                {
+                    list.map((task, index) => (
+                        <div className="flex items-center justify-between">
+                            <div className="w-[92%] mb-4 flex items-center justify-between rounded p-6 shadow-[0_0_5px_1px_rgba(0,0,0,0.3)] hover:shadow-[0_0_2px_1px_rgba(0,0,0,0.3)] ease-in-out duration-200">
+                                <div className=" flex flex-col gap-2">
+                                    <h4 className="font-bold">{task.title}</h4>
+                                    <p>{task.description}</p>
+                                </div>
+                                <div className="flex flex-col items-end gap-4">
+                                    <p className="text-[13px]">{task.date.toString()}</p>
+                                    <button className="" onClick={() => changeColor(task.status)}>
+                                        <div className={currentStatus}></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex flex-col">
+                                <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openEditModal()}><Image src={pen} alt={""}/></button>
+                                <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openDeleteModal()}><Image src={trash} alt={""}/></button>
+                            </div>
                         </div>
-                        <div className="flex flex-col items-end gap-4">
-                            <p className="text-[13px]">{date}</p>
-                            <button className="" onClick={() => changeColor(status)}>
-                                <div className={currentStatus}></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openEditModal()}><Image src={pen} alt={""}/></button>
-                        <button className="w-[17px] h-[17px] mb-4 cursor-pointer opacity-70 hover:opacity-100" onClick={() => openDeleteModal()}><Image src={trash} alt={""}/></button>
-                    </div>
-                </div>
+                    ))
+                }
             </div>
 
             {/* Modal new task */}
