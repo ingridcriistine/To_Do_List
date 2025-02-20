@@ -60,7 +60,7 @@ const List = ({ list }: { list: data[] }) => {
             </div> 
             <div className="mt-14">
                 {
-                    list.map((task, index) => (
+                    list.map((task, key) => (
                         <div className="flex items-center justify-between">
                             <div className="w-[92%] mb-4 flex items-center justify-between rounded p-6 shadow-[0_0_5px_1px_rgba(0,0,0,0.3)] hover:shadow-[0_0_2px_1px_rgba(0,0,0,0.3)] ease-in-out duration-200">
                                 <div className=" flex flex-col gap-2">
